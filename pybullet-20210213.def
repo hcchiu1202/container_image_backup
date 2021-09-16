@@ -1,0 +1,65 @@
+BootStrap: docker
+From: nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04 
+
+%environment
+TF_FORCE_GPU_ALLOW_GROWTH=true
+
+%post
+apt-get update -q
+DEBIAN_FRONTEND=noninteractive
+apt-get install -y \
+  python3 \
+  python3-pip \
+  wget \
+  curl \
+  git \
+  unzip \
+  vim \
+  xauth \
+  swig
+  
+apt-get clean
+rm -rf /var/lib/apt/lists/*
+
+#rm /usr/local/bin/python
+ln -s /usr/bin/python3 /usr/local/bin/python
+
+python3 -m pip install -q --upgrade pip setuptools
+
+# Math & Utilities
+python3 -m pip install -q \
+  numpy \
+  scipy \
+  jupyter \
+  ipywidgets \
+  tqdm \
+  omegaconf \
+  keras-tuner \
+  matplotlib
+
+# ML & DS libraries
+python3 -m pip install -q \
+  pandas scikit-learn catboost optuna seaborn
+
+# PyTorch
+python3 -m pip install -q \
+  torch==1.4.0+cu100 \
+  torchvision==0.5.0+cu100 \
+  -f https://download.pytorch.org/whl/torch_stable.html
+
+# Tensorflow 2
+python3 -m pip install -q \
+  tensorflow-gpu==2.0.0 \
+  tensorflow_probability==0.8.0
+
+# Pybullet
+python3 -m pip install -q \
+  pybullet \
+  stable_baselines3
+
+# Muzero related
+python3 -m pip install -q \
+  box2d-py \
+  gym \
+  nevergrad 
+  
