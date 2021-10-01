@@ -1,0 +1,136 @@
+BootStrap: library
+From: ubuntu:20.04
+
+%post
+    apt update && apt install -y software-properties-common
+
+    add-apt-repository universe
+
+    apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
+        build-essential \
+        emacs \
+        net-tools \
+        zlib1g-dev \
+        pkg-config \
+        libblas-dev \
+        liblapack-dev \
+        libfluidsynth-dev \
+        libfreetype6-dev \
+        libgl1-mesa-dev \
+        libgl1-mesa-glx \
+        libglfw3 \
+        libglew2.1 \
+        libglew-dev \
+        libglu1-mesa-dev \
+        libgme-dev \
+        libboost-all-dev \
+        libosmesa6 \
+        libosmesa6-dev \
+        libpng-dev \
+        libjpeg-dev \
+        libsdl2-dev \
+        libbz2-dev \
+        libopenal-dev \
+        pipenv \
+        zsh \
+        fish \
+        patchelf \
+        timidity \
+        swig \
+        nasm \
+        git \
+        wget \
+        vim \
+        curl \
+        zip \
+        unzip \
+        cmake \
+        python3-tk \
+        python3-pyqt5 \
+        python3-wheel \
+        python3-venv \
+        python3-distutils \
+        python3-cffi \
+        python3.8 \
+        python3.8-dev \
+        xpra \
+        xserver-xorg-dev \
+        ffmpeg \
+        xvfb \
+        spyder \
+        tar  \
+        libsndfile1 \
+        espeak
+
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+    # Setup Python3.8 and pip
+    ln -s /usr/bin/python3.8 /usr/local/bin/python
+    ln -s /usr/bin/python3.8 /usr/local/bin/python3
+    curl -sL https://bootstrap.pypa.io/get-pip.py | python3.8
+
+    #unlink /run/shm
+
+    # Install some "general" Python libraries
+    python3.8 -m pip --no-cache-dir install\
+        setuptools \
+        wheel \
+        cython==0.29.21 \
+        numpy \
+        scipy \
+        pandas \
+        scikit-learn \
+        scikit-image \
+        Pillow \
+        opencv-python \
+        matplotlib \
+        seaborn \
+        jupyterlab \
+        tqdm \
+        plotly \
+        PyQt5 \
+        multiprocess \
+
+    python3.8 -m pip --no-cache-dir install\
+        librosa==0.8.0 \
+        Unidecode==1.1.1 \
+        phonemizer==2.2.1 \
+        pydub \
+        sounddevice \
+        SoundFile \
+        inflect \
+        webrtcvad \
+        pyopenjtalk
+
+    # Some other utils libraries
+    python3.8 -m pip --no-cache-dir install\
+        umap-learn \
+        visdom \
+        numba \
+
+
+    # Install PyTorch
+    python3.8 -m pip --no-cache-dir install\
+        torch==1.7.1+cu110 \
+        torchvision==0.8.2+cu110 \
+        torchaudio==0.7.2 \
+        -f https://download.pytorch.org/whl/torch_stable.html
+
+    # Install tensorflow
+    python3.8 -m pip --no-cache-dir install\
+        tensorflow==2.3.1 \
+        tensorflow_probability==0.12.1
+
+    # Install Apex
+    git clone https://github.com/NVIDIA/apex
+#    cd apex
+#    python3.8 -m pip --no-cache-dir install\
+#         --disable-pip-version-check --no-cache-dir ./\
+#         #--disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--#cuda_ext" ./
+
+ 
+
+%help
+    This is a container for DeepRL experiments of text to speech.
+    Contains Python3.8, PyTorch 1.7.1
+
