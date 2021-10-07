@@ -132,6 +132,11 @@ From: ubuntu:20.04
 #         --disable-pip-version-check --no-cache-dir ./\
 #         #--disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--#cuda_ext" ./
 
+    # Download dic file for pyopenjtalk
+    cd /usr/local/lib/python3.8/dist-packages/pyopenjtalk/
+    wget https://github.com/r9y9/open_jtalk/releases/download/v1.11.1/open_jtalk_dic_utf_8-1.11.tar.gz \
+         && tar -zxvf open_jtalk_dic_utf_8-1.11.tar.gz
+
 %help
     This is a container for DeepRL experiments of text to speech.
     Contains Python3.8, PyTorch 1.7.1
