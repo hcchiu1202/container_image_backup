@@ -1,6 +1,9 @@
 BootStrap: library
 From: ubuntu:20.04
 
+%environment
+    export JUPYTER_RUNTIME_DIR=/tmp
+
 %post
     apt update && apt install -y software-properties-common
 
@@ -71,8 +74,6 @@ From: ubuntu:20.04
         pycryptodome \
         click \
         yuu
-
-    export JUPYTER_RUNTIME_DIR=/tmp
 
 %help
     This is a container for mainly video download from sites and image editing etc.

@@ -1,6 +1,9 @@
 BootStrap: library
 From: ubuntu:20.04
 
+%environment
+    export JUPYTER_RUNTIME_DIR=/tmp
+
 %post
     apt update && apt install -y software-properties-common
 
@@ -128,8 +131,6 @@ From: ubuntu:20.04
 #    python3.8 -m pip --no-cache-dir install\
 #         --disable-pip-version-check --no-cache-dir ./\
 #         #--disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--#cuda_ext" ./
-
-    export JUPYTER_RUNTIME_DIR=/tmp
 
 %help
     This is a container for DeepRL experiments of text to speech.
