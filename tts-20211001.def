@@ -100,7 +100,8 @@ From: ubuntu:20.04
         SoundFile \
         inflect \
         webrtcvad \
-        pyopenjtalk
+        pyopenjtalk \
+        ffmpeg-normalize \
 
     # Some other utils libraries
     python3.8 -m pip --no-cache-dir install\
